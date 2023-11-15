@@ -65,19 +65,24 @@ app.get('/notes/:note_name', (req, res) => {
     }
 })
 
-app.put('/notes/:note_name', (req, res) => {
+/*app.put('/notes/:note_name', (req, res) => {
     const noteName = req.params.note_name;
-    const note = req.body.note;
+    const notebody = req.body.note;
     const findNoteIndex = notes.findIndex(note => note.note_name === noteName);
 
-    if (findNoteIndex) {
-        notes[findNoteIndex].note = note;
+    if (findNoteIndex!=-1) {
+        notes[findNoteIndex].note = notebody;
         writeNotesToFile(notes);
-        res.json({ note_name: noteName, note: notes[findNoteIndex].note });
+        res.json({ note_name: noteName, note: notebody });
     } else {
         res.status(404).send("Note not found(");
     }
-});
+});*/
+app.put("/notes/:note_name", /*upload.none()*/ express.text(), (req, res) => {
+    console.log("Params:", req.params)
+    console.log("Body:", req.body)
+    res.sendStatus(200);
+})
 
 app.delete('/notes/:note_name', (req, res) => {
     const noteName = req.params.note_name;
